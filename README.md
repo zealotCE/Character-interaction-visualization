@@ -8,33 +8,32 @@
 
 ## 安装
 
-安装环境：Anaconda，java，gephi
-
+安装环境：[Anaconda](https://www.anaconda.com/download/)，[java](http://sdlc-esd.oracle.com/ESD6/JSCDL/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/JavaSetup8u144.exe?GroupName=JSC&FilePath=/ESD6/JSCDL/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/JavaSetup8u144.exe&BHost=javadl.sun.com&File=JavaSetup8u144.exe&AuthParam=1505880785_559cf44748f2ba4f8fbac5d8b559fe0d&ext=.exe)，[gephi](https://github.com/gephi/gephi)
 Anaconda安装注意：
 
-1． 打开程序：Anaconda3-4.4.0-Windows-x86_64.exe 
+1． 打开程序：`Anaconda3-4.4.0-Windows-x86_64.exe` 
 
 2． 在选择了安装路径后注意勾选 Add Anaconda to my_path…![](http://om80aljc8.bkt.clouddn.com/17-9-26/7067669.jpg)
 
-3． 打开程序： C:\WINDOWS\system32\cmd.exe 右键管理员运行，出现一个黑框
+3． 打开程序： `C:\WINDOWS\system32\cmd.exe` 右键管理员运行，出现一个黑框
 
-4． 输入：pip install jieba  回车，等待出现success![](http://om80aljc8.bkt.clouddn.com/17-9-26/7774652.jpg)![](http://om80aljc8.bkt.clouddn.com/17-9-26/55291133.jpg)  
+4． 输入：`pip install jieba`  回车，等待出现success![](http://om80aljc8.bkt.clouddn.com/17-9-26/7774652.jpg)![](http://om80aljc8.bkt.clouddn.com/17-9-26/55291133.jpg)  
 
 Java 安装：
 
-1.    打开程序 JavaSetup8u144.exe
+1.    打开程序 `JavaSetup8u144.exe`
 
 2.    一路下一步就行（用默认文件夹）
 
 Gephi 安装：
 
-1.    打开程序： gephi-0.9.2-20170923.130053-377-windows.exe
+1.    打开程序： `gephi-0.9.2-20170923.130053-377-windows.exe`
 
 2.    一路下一步（用默认文件夹）
 
-3.    打开我的电脑进入文件夹：C:\ProgramFiles\Gephi-0.9.2-SNAPSHOT\etc
+3.    打开我的电脑进入文件夹(或者是找到你修改的路径)：`C:\ProgramFiles\Gephi-0.9.2-SNAPSHOT\etc`
 
-4.    将文件gephi.conf替换掉（给你的压缩包里有）
+4.    将文件gephi.conf的最后添加一行 `jdkhome="C:\Program Files (x86)\Java\jre1.8.0_144"`
 
  
 
