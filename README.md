@@ -9,6 +9,7 @@
 ## 安装
 
 安装环境：[Anaconda](https://www.anaconda.com/download/)，[java](http://sdlc-esd.oracle.com/ESD6/JSCDL/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/JavaSetup8u144.exe?GroupName=JSC&FilePath=/ESD6/JSCDL/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/JavaSetup8u144.exe&BHost=javadl.sun.com&File=JavaSetup8u144.exe&AuthParam=1505880785_559cf44748f2ba4f8fbac5d8b559fe0d&ext=.exe)，[gephi](https://github.com/gephi/gephi)
+
 Anaconda安装注意：
 
 1． 打开程序：`Anaconda3-4.4.0-Windows-x86_64.exe` 
