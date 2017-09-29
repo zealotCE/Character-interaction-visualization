@@ -14,8 +14,8 @@ dict_path = r"E:\onedrive\python_codes\WordCloud\红楼梦\Dream_of_the_Red_Cham
 
 
 '''
-核心业务代码是 self.gephi_note_name 和 self.gephi_edge  用于处理检查统计的人物
-其中 gephi_cofig.gephi_note_name 会统计人物出现的次数，并且生成给 gephi_config.gephi_edege 处理所需要的 _lineNames 
+核心业务代码是 self.gephi_node_name 和 self.gephi_edge  用于处理检查统计的人物
+其中 gephi_cofig.gephi_node_name 会统计人物出现的次数，并且生成给 gephi_config.gephi_edege 处理所需要的 _lineNames 
 
 '''
 
@@ -40,10 +40,10 @@ class gephi_config:
         now = self.get_time()
         dirname = os.path.dirname(self._content_path)   
         content_name = os.path.splitext(os.path.split(self._content_path)[1])[0]
-        self._dst_note = os.path.join(dirname,(content_name +'gephi_note-' + now +'.csv'))
+        self._dst_node = os.path.join(dirname,(content_name +'gephi_node-' + now +'.csv'))
         self._dst_edge = os.path.join(dirname,(content_name +'gephi_edge-' + now +'.csv'))
 
-        print('生成的节点文件是：{} \n生成的连接文件是：{}'.format(self._dst_note[-19:],self._dst_edge[-19:]))
+        print('生成的节点文件是：{} \n生成的连接文件是：{}'.format(self._dst_node[-19:],self._dst_edge[-19:]))
         
         # 初始化状态、列表、指点对象
         self._name_mode = name_mode # 确定使用那种模式
@@ -92,10 +92,10 @@ class gephi_config:
             for txt_path in local_txt_path_list:
                 if os.path.getsize(txt_path) > 10000: # 通过文件大小判断那个是主体文件
                     self._content_path = txt_path     # 小说的路径确定
-                    print('小说文件是 {}'.format(os.path.split(self._content_path[1])))
+                    print('小说文件是 {}'.format(os.path.split(self._content_path)[1]))
                 else:
                     self._dict_path = txt_path        # 小说角色文件路径确定
-                    print('人物文件是 {}'.format(os.path.split(self._dict_path[1])))
+                    print('人物文件是 {}'.format(os.path.split(self._dict_path)[1]))
 
             print("get local txt file path.")
 
@@ -114,7 +114,9 @@ class gephi_config:
             if a['encoding'] == 'gb2312' or a['encoding'] == 'GB2312':
                 coding_type = 'gb18030'
             elif a['encoding'] == 'utf-8':
-                coding_type = 'utf-8'
+                coding_type = a['encoding']
+            elif a['encoding'] == 'UTF-8-SIG':
+                coding_type = a['encoding']
             else:
                 print("无法确认编码")
             return coding_type
@@ -146,7 +148,7 @@ class gephi_config:
         return Synonymous_dict
         
     # 不精准模式，利用jieba自带的词性判断能自动判断人名，但是经常超出预期。
-    def gephi_note(self):
+    def gephi_node(self):
         jieba.load_userdict(self._dict_path) #加载jieba字典
         with codecs.open(self._content_path, "r",self.content_coding(self._content_path)) as f:
             for lines in f.readlines():
@@ -160,12 +162,12 @@ class gephi_config:
                         self._names[w.word] = 0
                         self._relationships[w.word] = {}
                     self._names[w.word] += 1
-        print('gephi note done!')
+        print('gephi node done!')
         return self._lineNames
 
     # 使用精准文字模式，只检索指定人名
-    def gephi_note_name(self):
-        print('start process note')
+    def gephi_node_name(self):
+        print('start process node')
         Synonymous_dict = self.Synonymous_names()
         name_set = set(self._jieba_dict.split(' 10 nr\r\n'))    # 将jieba所需要文件样式切割成由任务名组成的 name_set
         jieba.load_userdict(self._dict_path)
@@ -183,7 +185,7 @@ class gephi_config:
                         self._names[w] = 0
                         self._relationships[w] = {}
                     self._names[w] += 1
-        print('gephi note done!')
+        print('gephi node done!')
         return self._lineNames
 
     
@@ -204,8 +206,8 @@ class gephi_config:
         return self._relationships
 
     # 将处理的信息保存为csv文件
-    def save_note_and_edge(self):
-        with codecs.open(self._dst_note, "a+", "utf-8") as f:
+    def save_node_and_edge(self):
+        with codecs.open(self._dst_node, "a+", "utf-8") as f:
             f.write("Id,Label,Weight\r\n")
             for name, times in self._names.items():
                 f.write(name + "," + name + "," + str(times) + "\r\n")
@@ -221,10 +223,10 @@ class gephi_config:
     # 处理流程
     def do_first(self):
         if self._name_mode :
-            self.gephi_note_name()
+            self.gephi_node_name()
         else:
-            self.gephi_note()
-        self.save_note_and_edge()
+            self.gephi_node()
+        self.save_node_and_edge()
 
 
 if __name__ == '__main__':
